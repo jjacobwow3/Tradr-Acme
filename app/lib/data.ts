@@ -5,21 +5,15 @@ import {
   InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
+  PkmnCard,
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
 
 export async function fetchRevenue() {
   try {
-    // Artificially delay a response for demo purposes.
-    // Don't do this in production :)
-
-    // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
-
-    // console.log('Data fetch completed after 3 seconds.');
 
     return data.rows;
   } catch (error) {
@@ -45,6 +39,32 @@ export async function fetchLatestInvoices() {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the latest invoices.');
+  }
+}
+
+// POKEMON CARD
+export async function fetchPkmnCard() {
+  try {
+
+    const data = await sql<PkmnCard>
+    `Select * FROM cards`;
+
+    const name = 'Charizard'
+    const code = '111'
+    const set = 'OBF'
+    const price = 11.11
+    const image = 'https://images.pokemontcg.io/sv3/125.png'
+
+    return {
+      name,
+      code,
+      set,
+      price,
+      image
+    };
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch revenue data.');
   }
 }
 
@@ -83,7 +103,7 @@ export async function fetchCardData() {
   }
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 10;
 export async function fetchFilteredInvoices(
   query: string,
   currentPage: number,
