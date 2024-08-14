@@ -1,5 +1,6 @@
 import { sql } from '@vercel/postgres';
 import {
+  CollectedCard,
   CustomerField,
   CustomersTableType,
   InvoiceForm,
@@ -103,7 +104,7 @@ export async function fetchCardData() {
   }
 }
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
   query: string,
   currentPage: number,
@@ -136,6 +137,46 @@ export async function fetchFilteredInvoices(
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoices.');
+  }
+}
+
+const CARDS_PER_PAGE = 4;
+export async function fetchFilteredCards(
+  query: string,
+  currentPage: number,
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const cards = await sql<CollectedCard>`
+    SELECT
+      collection.collection_id,
+      collection.name,
+      collection.code,
+      collection.set,
+      collection.price,
+      collection.image,
+      collection.copies
+    FROM collection
+`;
+
+    return cards.rows;
+  } catch (error) {
+    console.error('Databse Error:', error);
+    throw new Error('Failed to fetch Cards.');
+  }
+}
+
+export async function fetchCollectionPages(query: string) {
+  try {
+    const count = await sql`SELECT COUNT(*)
+    FROM collection
+`;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    throw new Error('Failed to fetch total number of cards')
   }
 }
 

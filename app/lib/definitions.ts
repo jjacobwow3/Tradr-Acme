@@ -32,11 +32,22 @@ export type Revenue = {
 };
 
 export type PkmnCard = {
+  id: string;
   name: string;
   code: string;
   set: string;
   price: number;
   image: string;
+}
+
+export type CollectedCard = {
+  id: string;
+  name: string;
+  code: string;
+  set: string;
+  price: number;
+  image: string;
+  copies: number;
 }
 
 export type LatestInvoice = {
