@@ -23,7 +23,7 @@ export default async function Page({
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
-        <h1 className={`${lusitana.className} text-2xl`}>Collection</h1>
+        <h1 className={`text-2xl`}>Collection</h1>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
         <Search placeholder="Search collection..." />
@@ -37,28 +37,3 @@ export default async function Page({
     </div>
   );
 }
-
-/* export default async function Page() {
-  
-  const {
-    name,
-    code,
-    set,
-    price,
-    image,
-  } = await fetchPkmnCard();
-
-  return (
-    <main>
-      <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-        Collection
-      </h1>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <PkmnCard name={name} code={code} set={set} price={price} image={image} />
-        <PkmnCard name={name} code={code} set={set} price={price} image={image} />
-      </div>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-      </div>
-    </main>
-  );
-} */

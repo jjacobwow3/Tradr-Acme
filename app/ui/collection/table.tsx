@@ -3,6 +3,7 @@ import { fetchFilteredCards } from '@/app/lib/data';
 import { formatCurrency } from '@/app/lib/utils';
 import { PkmnCard } from '../dashboard/pkmncard';
 import { lusitana } from '../fonts';
+import  styles from '@/app/ui/collection.module.css';
 
 export default async function CardsTable({
     query,
@@ -14,32 +15,35 @@ export default async function CardsTable({
     const cards = await fetchFilteredCards(query, currentPage);
 
     return (
-        <div className="mt-6 flow-root">
-            <div className="inline-block min-w-full align-middle">
-                <tbody className="bg-white">
-
-                    {/* CARD TEMPLATE */}
-                    {cards?.map((card) => (
+        <div className={styles.outerContainer}>
+            <div className={styles.cardContainer}>
+                {/* CARD TEMPLATE */}
+                {cards?.map((card) => (
+                    <a href="https://www.reddit.com/">
                         <div
                         key={card.id}
-                        className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                        className={styles.card}
                         >
-                        <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
-                            <div className={`${lusitana.className}
-                                    truncate rounded-xl bg-gray-600 px-4 py-8 text-center text-2xl`}>
-                                <img src={card.image}></img>
-                                <div className="flex p-4">
-                                    <h3 className="ml-2 text-lg font-medium">{card.name}</h3>
-                                    </div>
-                                    <p className="ml-2 text-sm font-medium">
-                                    {card.code} {card.set} ${card.price}
-                                    </p>
-                                </div>
+                            <div className={styles.imageContainer}>
+                                <img 
+                                src={card.image}
+                                alt={`${card.name} picture`}
+                                height={100}
+                                width={200}
+                                ></img>
                             </div>
-
+                            <div className={styles.textBox}>
+                                <h3 className={styles.cardName}>{card.name}</h3>
+                                <p>{card.set}</p>
+                                <p>{card.code}</p>
+                                <div className={styles.miniTextBox}>
+                                    <p className={styles.price}>${card.price}</p>
+                                    <p>Qty: {card.copies}</p>
+                                </div>
+                            </div>                         
                         </div>
-                    ))}
-                </tbody>
+                    </a>
+                ))}
             </div>                
         </div>
     );

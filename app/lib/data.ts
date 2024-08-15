@@ -140,12 +140,12 @@ export async function fetchFilteredInvoices(
   }
 }
 
-const CARDS_PER_PAGE = 4;
+const CARDS_PER_PAGE = 100;
 export async function fetchFilteredCards(
   query: string,
   currentPage: number,
 ) {
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  const offset = (currentPage - 1) * CARDS_PER_PAGE;
 
   try {
     const cards = await sql<CollectedCard>`
@@ -158,7 +158,13 @@ export async function fetchFilteredCards(
       collection.image,
       collection.copies
     FROM collection
-`;
+    WHERE 
+      collection.name ILIKE ${`%${query}%`} OR
+      collection.code ILIKE ${`%${query}%`} OR
+      collection.set ILIKE ${`%${query}%`}
+    ORDER BY collection.price DESC
+    LIMIT ${CARDS_PER_PAGE} OFFSET ${offset}
+    `;
 
     return cards.rows;
   } catch (error) {
