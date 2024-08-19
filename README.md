@@ -1,4 +1,4 @@
-
+![alt text](https://github.com/jjacobwow3/nextjs-dashboard/blob/master/public/opengraph-image.png)
 # Acme
 
 Your personal invoice dashboard.
