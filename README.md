@@ -7,4 +7,4 @@ Your personal invoice dashboard.
 Create, edit and delete invoices with ease while tracking finances and customers.
 ## How to Use
 
-Visit
+Visit https://nextjs-dashboard-olive-one-50.vercel.app/ and login.
