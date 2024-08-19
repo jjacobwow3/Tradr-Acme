@@ -41,6 +41,7 @@ export type PkmnCard = {
 }
 
 export type CollectedCard = {
+  collection_id: number;
   id: string;
   name: string;
   code: string;

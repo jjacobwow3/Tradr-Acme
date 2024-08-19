@@ -1,11 +1,9 @@
 import Pagination from '@/app/ui/invoices/pagination';
 import Search from '@/app/ui/search';
-import { lusitana } from '@/app/ui/fonts';
+import Table from '@/app/ui/collection/table';
 import { Suspense } from 'react';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
-import { PkmnCard } from '@/app/ui/dashboard/pkmncard';
-import Table from '@/app/ui/collection/table';
-import { fetchCollectionPages, fetchFilteredCards, fetchPkmnCard } from '@/app/lib/data';
+import { fetchCollectionPages } from '@/app/lib/data';
 
 export default async function Page({
   searchParams,
@@ -15,6 +13,7 @@ export default async function Page({
     page?: string;
   };
 }) {
+  
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
 

@@ -1,4 +1,4 @@
-  import { lusitana } from '@/app/ui/fonts';
+  import { inter } from '@/app/ui/fonts';
   
   export function PkmnCard({ 
     name,
@@ -16,7 +16,7 @@
   
     return (
       <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
-        <div className={`${lusitana.className}
+        <div className={`${inter.className}
                     truncate rounded-xl bg-gray-600 px-4 py-8 text-center text-2xl`}>
             <img src={image}></img>
             <div className="flex p-4">

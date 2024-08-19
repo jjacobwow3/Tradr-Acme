@@ -20,6 +20,11 @@
     border-radius: 1rem;
     margin: .3rem;
     box-shadow: 0 0px .5rem 0 rgba(0, 0, 0, 0.5);
+    transition: transform .2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
 }
 
 .imageContainer {

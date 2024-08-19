@@ -140,7 +140,7 @@ export async function fetchFilteredInvoices(
   }
 }
 
-const CARDS_PER_PAGE = 100;
+const CARDS_PER_PAGE = 10;
 export async function fetchFilteredCards(
   query: string,
   currentPage: number,
@@ -151,6 +151,7 @@ export async function fetchFilteredCards(
     const cards = await sql<CollectedCard>`
     SELECT
       collection.collection_id,
+      collection.id,
       collection.name,
       collection.code,
       collection.set,
@@ -165,7 +166,6 @@ export async function fetchFilteredCards(
     ORDER BY collection.price DESC
     LIMIT ${CARDS_PER_PAGE} OFFSET ${offset}
     `;
-
     return cards.rows;
   } catch (error) {
     console.error('Databse Error:', error);
@@ -229,6 +229,34 @@ export async function fetchInvoiceById(id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
+  }
+}
+
+export async function fetchCardById(id: string) {
+  try {
+    const data = await sql<CollectedCard>`
+      SELECT
+        collection.collection_id,
+        collection.id,
+        collection.name,
+        collection.code,
+        collection.set,
+        collection.price,
+        collection.image,
+        collection.copies
+      FROM collection
+      WHERE collection.id = ${id};
+    `;
+
+    const card = data.rows.map((card) => ({
+      ...card,
+    }));
+
+    return card[0]
+
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch card.');
   }
 }
 

@@ -1,8 +1,4 @@
-import Image from 'next/image';
 import { fetchFilteredCards } from '@/app/lib/data';
-import { formatCurrency } from '@/app/lib/utils';
-import { PkmnCard } from '../dashboard/pkmncard';
-import { lusitana } from '../fonts';
 import  styles from '@/app/ui/collection.module.css';
 
 export default async function CardsTable({
@@ -19,17 +15,14 @@ export default async function CardsTable({
             <div className={styles.cardContainer}>
                 {/* CARD TEMPLATE */}
                 {cards?.map((card) => (
-                    <a href="https://www.reddit.com/">
-                        <div
-                        key={card.id}
-                        className={styles.card}
-                        >
+                    <a href={`/dashboard/collection/${card.id}`}>
+                        <div className={styles.card}>
                             <div className={styles.imageContainer}>
                                 <img 
-                                src={card.image}
-                                alt={`${card.name} picture`}
-                                height={100}
-                                width={200}
+                                    src={card.image}
+                                    alt={`${card.name} picture`}
+                                    height={100}
+                                    width={200}
                                 ></img>
                             </div>
                             <div className={styles.textBox}>
