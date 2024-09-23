@@ -1,3 +1,5 @@
+## This is a two-project repository (due to hosting limitations)
+
 ![alt text](https://github.com/jjacobwow3/nextjs-dashboard/blob/master/public/opengraph-image.png)
 # Acme
 
